@@ -1,5 +1,6 @@
 import helper
 
+
 participants = []
 while True:
     user_input = input("insert 'reg' o enroll,'info' to get your information,'admin' enter admin control panel: ").lower()
@@ -27,16 +28,14 @@ while True:
             
                     
     elif user_input == "admin":
-        check = input("Enter your password : ")
-        if check == "0000":
+        check = int(input("Enter your password : "))
+        if check == 0000:
+            
             helper.creat_json(participants)
             
             helper.creat_csv(participants)
+        
                           
                     
     else:
         print("Wrong Option!")          
-        
-
-        
-        
