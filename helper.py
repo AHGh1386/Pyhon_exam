@@ -33,14 +33,22 @@ def get_student_info():
     return std
 
 
-def creat_json(participants):
-    for participant in participants:
-        participants.append({'Code' :participant.code, 'Name' : participant.name, 'Family': participant.family})
-    with open('participants.json' , 'w') as jsonfile:
-        json.dump(participants, jsonfile, indent = 4)
+def create_json(lst):
+    string = []
+    for item in lst:
+        obj = {}
+        obj["code"] = item.code
+        obj["name"] = item.name
+        obj["family"] = item.family
+        string.append(obj)
+    data = json.dumps(string)
+    print(data)
+    Path("participants.json").write_text(data, encoding="utf-8")
 
-def creat_csv(participants):
-    with open('participates.csv' , 'w') as csvfile:
-        writer = csv.DictWriter(csvfile,fieldnames=participants)
-        for participant in participants:
-            writer.writerow({'Code' :participant.code, 'Name' : participant.name, 'Family': participant.family})
+
+def create_csv(lst):
+    with open("participants.csv", "w", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Code", "Name", "Family"])
+        for item in lst:
+            writer.writerow([item.code, item.name, item.family])
