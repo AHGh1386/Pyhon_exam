@@ -19,23 +19,29 @@ while True:
                 
                      
     elif user_input == "info":
-        while True:
-            participant = int(input("Please Enter your code:"))
-            for participant in participants:
-                if participant.code:
-                    print(f"Code = {participant.code} , Name = {participant.name} , Family = {participant.family}")
-            
-            
-                    
-    elif user_input == "admin":
-        check = int(input("Enter your password : "))
-        if check == 0000:
-            
-            helper.creat_json(participants)
-            
-            helper.creat_csv(participants)
-        
-                          
-                    
-    else:
-        print("Wrong Option!")          
+            while True:
+                user_code = input(
+                    "Please enter your Code(enter 'back' to exit): ").lower()
+                if user_code == "back":
+                    break
+                for item in participants_list:
+                    if item.code == user_code:
+                        item.show_info()
+                        break
+                else:
+                    print(
+                        "Your code is not correct or You're not register in our list.")
+        elif user_input == "admin":
+            while True:
+                admin_code = input(
+                    "Please enter your Administrator code: ")
+                if admin_code == "0000":
+                    helper.create_csv(participants_list)
+                    helper.create_json(participants_list)
+                    print("Your files has been created")
+                    break
+                else:
+                    print("Wrong Code!")
+                    break
+        else:
+            print("Wrong Option!")
